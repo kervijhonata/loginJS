@@ -1,0 +1,79 @@
+:root {
+  --honeydew: #edffecff;
+  --light-green: #61e786ff;
+  --independence: #5a5766ff;
+  --independence-2: #48435cff;
+  --blue-bell: #9792e3ff;
+}
+
+body {
+  margin: 0;
+  background: var(--independence-2);
+  font-family: sans-serif;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 96vh;
+}
+main .form-login {
+  width: 60%;
+  min-height: 300px;
+  background-color: var(--independence);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--honeydew);
+  border-radius: 12px;
+  padding: 0 40px;
+  box-sizing: border-box;
+  /* box-shadow: 0 0 20px 8px var(--blue-bell); */
+}
+main .form-login .form-heading {
+  margin: 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+main .form-login .form-heading h1 {
+  color: var(--light-green);
+  font-weight: 500;
+}
+main .form-login label {
+  margin-bottom: 10px;
+  align-self: flex-start;
+}
+main .form-login input[type=email],
+main .form-login input[type=password] {
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--light-green);
+  margin-bottom: 28px;
+  color: var(--light-green);
+  width: 100%;
+  padding: 6px;
+}
+main .form-login input[type=email]:focus,
+main .form-login input[type=password]:focus {
+  outline: 1px solid var(--light-green);
+}
+main .form-login .button-submit {
+  padding: 6px 40px;
+  margin-bottom: 40px;
+  background: var(--light-green);
+  border-radius: 30px;
+  border: none;
+  color: var(--independence-2);
+  font-size: 12pt;
+  transition: 0.3s ease-in-out box-shadow, 0.3s ease-in-out transform;
+  outline: none;
+}
+main .form-login .button-submit:hover, main .form-login .button-submit:focus {
+  box-shadow: 3px 4px 0px black;
+  transform: translate(-2px, -2px);
+}
+
+/*# sourceMappingURL=style.css.map */

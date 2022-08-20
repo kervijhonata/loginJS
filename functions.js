@@ -8,6 +8,7 @@ function createUser(userData) {
     //Validate received Data
     if(this.name && this.email && this.password){
         const user = userData;
+        console.info(`User[${user.name}] created sucessfully`)
         return user
     }
 }
@@ -15,6 +16,7 @@ function createUser(userData) {
 const user1 = createUser({id: 0, name: "Kervi", email: "kervi@admin.com", password: "0000"})
 const user2 = createUser({id: 1, name: "Julie", email: "julie@comercial.com", password: "1234"})
 const user3 = createUser({id: 2, name: "Marcus", email: "marcus@media.com", password: "qwer"})
+const user4 = createUser({id: 3, name: "Jhonata", email: "kervij@gmail.com", password: "000"});
 
 //Database
 function createUserDB() {
@@ -22,7 +24,7 @@ function createUserDB() {
     function subscribe(user) {
         if(user){
             users.push(user)
-            console.log(`user [${user.id}][${user.name}] subscribed sucessfully`);
+            console.log(`user [${user.id}][${user.name}] subscribed to DB`);
         }else{
             console.log("cant subscribe: " + user)
         }
@@ -41,6 +43,7 @@ const userDB = createUserDB()
 userDB.subscribe(user1)
 userDB.subscribe(user2)
 userDB.subscribe(user3)
+userDB.subscribe(user4)
 
 /*
 const userDB = [
@@ -63,32 +66,57 @@ function createButton(targetSelector) {
 }
 
 const button = createButton();
-button.on("click", validateForm);
+button.on("click", validateData);
 
 //Event callBacks
-function validateForm(evt){
+function validateData(evt){
 
-    //Stop form redirect
+    //Stop form redirection
     evt.preventDefault()
 
     //Receive Data
-    let email = document.querySelector("#email").value
-    let password = document.querySelector("#password").value
+    this.email = document.querySelector("#email").value
+    this.password = document.querySelector("#password").value
 
-    //Verify received Data
-    let result = userDB.getUsers().filter(user => {
-        if(user.email == email && user.password == password){
-            return validated(user)
+    //Authentication :: Match received Data with User informations
+    let authenticatedUser = userDB.getUsers().find( user => {
+        if(user.email == this.email && user.password == this.password){
+            return user
         }
     });
 
-    function validated(user) {
-        console.info(user.name + "is authorized")
-        console.debug(`receivedData:\n
-        [${typeof email}] email: ${email}\n
-        [${typeof password}] password: ${password}`);
-        alert(`Bem vindo, ${user.name}!`)
+    //Validation
+    validate(authenticatedUser)
+
+    /** 
+     * This process above needs to occur in two steps:
+     *  .1. -> Authentication:
+     *      Find a user that match exactly with receved input data;
+     *      When matched condition==TRUE, return the object;
+     *      [IMPORTANT] A data return is required, even if it is FALSE;
+     * 
+     *  .2. -> Validation:
+     *      what will be done when this user passes TRUE or FALSE;
+     * */
+
+    function validate(user) {
+        if(user){
+            auth(user)
+        }else{
+            deny(user)
+        }
     }
+    
+    function auth(user) {
+        console.info(user.name + " is authorized")
+        alert(`Welcome, ${user.name}!`)
+    }
+    function deny() {
+        console.info("denied data")
+        alert("Verify your data and try again")
+    }
+    
+    delete( validateData);
 }
 
-//Test
+//TestArea

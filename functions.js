@@ -6,17 +6,19 @@ function createUser(userData) {
     this.password = userData.password;
     
     //Validate received Data
-    if(this.name && this.email && this.password){
+    if(this.id != undefined && this.email != undefined && this.password != undefined){
         const user = userData;
         console.info(`User[${user.name}] created sucessfully`)
         return user
+    }else{
+        console.log("Can't create an User with UNDEFINED data")
     }
 }
 
-const user1 = createUser({id: 0, name: "Kervi", email: "kervi@admin.com", password: "0000"})
+const user1 = createUser({id: 0, name: "Bill Gates", email: "gates@admin.com", password: "0000"})
 const user2 = createUser({id: 1, name: "Julie", email: "julie@comercial.com", password: "1234"})
 const user3 = createUser({id: 2, name: "Marcus", email: "marcus@media.com", password: "qwer"})
-const user4 = createUser({id: 3, name: "Jhonata", email: "kervij@gmail.com", password: "000"});
+const user4 = createUser({id: 3, name: "Kervi", email: "kervi@admin.com", password: "0000"});
 
 //Database
 function createUserDB() {

@@ -9,7 +9,7 @@ Este projeto foi construído com Javascript puro para <strong>exemplificar uma T
 ``` javascript
 
 /* Users [Observers]:: Create a new Object User */
-const user1 = createUser({id: 0, name: "Bill Gates", email: "gates@admin.com", password: "0000"})
+const user1 = createUser({name: "Bill Gates", email: "gates@admin.com", password: "0000"})
 
 /* Database [Subject]:: Create Database  */
 const userDB = createUserDB()
@@ -22,17 +22,19 @@ buttonFormSubmit.onClick = validateData /*Receive Form data, Match User data, Au
 ```
 ### 1. Instancie os Usuários
 ``` javascript
-const user1 = createUser({id: 0, name: "Bill Gates", email: "gates@admin.com", password: "0000"})
+const user1 = createUser({name: "Bill Gates", email: "gates@admin.com", password: "0000"})
 ```
-A Factory `createUser({userData:data})` do tipo Observer é responsável por criar usuários, retornando o objeto recebido no argumento da função se todos os dados forem válidos, evitando possíveis lacunas, permitindo a sanitização e o tratamento dos dados obtidos. Atualmente, as verificações são:
+A Factory `createUser({userData:data})` do tipo Observer é responsável por criar usuários, retornando o objeto recebido no argumento da função se todos os dados forem válidos, evitando possíveis lacunas de declaração, como duplicação de dados, permitindo a sanitização e o tratamento dos dados obtidos. Atualmente, as verificações são:
 - Objeto é passado como argumento
 - Valores do Objeto não são ``undefined``
+
+Por segurança, esta Factory não permite que um usuário seja declarado com ID's, retornando `0` ao objeto, encerrando o fluxo de execução da função. O controle de atribuição de ID's está delegado à camada de registro. 
 
 ### 2. Crie a Instância da Database
 ``` javascript
 const userDB = createUserDB()
 ```
-A função ``createUserDB`` é uma Factory do tipo Subject que simula um banco de dados. Sua instância retorna um Array chamado Users, que funciona como armazenador, e uma coleção de propriedades para manipular este array. Atualmente, é possível cadastrar um usuário com `subscribe({user})` e obter o array completo através de `getUsers()`
+A função ``createUserDB`` é uma Factory do tipo Subject que simula um banco de dados. Sua instância retorna um Array chamado `users`, que funciona como armazenador, e uma coleção de propriedades utilizadas para manipular este array. Atualmente, é possível cadastrar um usuário com `subscribe({user})`, que automaticamente atribui um ID ao objeto recebido, sendo possível também obter o retorno completo de `users[]` através de `getUsers()`.
 
 ### 3. Atribua o callback ``validateData`` à um  elemento emissor de Eventos 
 ``` javascript

@@ -34,7 +34,6 @@ main {
         .form-heading {
             // background-color: rgba(0, 0, 0, .1);
             margin: 20px;
-
             width: 100%;
             display: flex;
             align-items: center;
@@ -43,6 +42,7 @@ main {
             h1 {
                 color: var(--light-green);
                 font-weight: 500;
+                text-align: center;
             }
         }
     
@@ -82,6 +82,35 @@ main {
             &:focus {
                 box-shadow: 3px 4px 0px black;
                 transform: translate(-2px, -2px);
+            }
+        }
+    }
+}
+
+@media  screen and (min-width: 1024px) {
+    // PC
+}
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    // Tablet
+}
+@media screen and (max-width: 767px){
+    // Mobile
+    main {
+        .form-login {
+            width: 90%;
+
+            label {
+                font-size: 12pt;
+            }
+            
+            input[type=email],
+            input[type=password]{
+                height: 30px;
+            }
+
+            .button-submit {
+                font-size: 16pt;
+                padding: 12px 60px;
             }
         }
     }
